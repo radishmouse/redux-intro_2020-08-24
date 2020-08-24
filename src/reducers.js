@@ -19,18 +19,27 @@ export function counter(state, action) {
         //     [action.payload.account]: state[action.payload.account] + action.payload.amount
         // }
         // return newState;
-        return {
-            ...state,
-            [action.payload.account]: state[action.payload.account] + action.payload.amount
+        if (state[action.payload.account]) {
+            return {
+                ...state,
+                [action.payload.account]: state[action.payload.account] + action.payload.amount
+            }
+        } else {
+            return state;
         }
 
       case WITHDRAW:
         // do the withdraw
         // and return
-        return {
-            ...state,
-            [action.payload.account]: state[action.payload.account] - action.payload.amount
+        if (state[action.payload.account]) {
+            return {
+                ...state,
+                [action.payload.account]: state[action.payload.account] - action.payload.amount
+            }
+        } else {
+            return state;
         }
+
       default:
         return state;
     }

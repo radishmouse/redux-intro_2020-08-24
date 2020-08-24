@@ -3,16 +3,22 @@
 export const DEPOSIT = 'deposit';
 export const WITHDRAW = 'withdraw';
 
-export function actionDeposit(amount) {
+export function actionDeposit(amount, account) {
   return {
     type: DEPOSIT,
-    payload: amount
+    payload: {
+        amount,
+        account
+    }
   };
 }
 
-export function actionWithdraw(amount) {
+export function actionWithdraw(amount, account) {
   return {
     type: WITHDRAW,
-    payload: amount
+    payload: {
+        amount,
+        account
+    }
   };
 }

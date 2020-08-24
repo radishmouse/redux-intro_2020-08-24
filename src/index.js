@@ -5,7 +5,7 @@ console.log('Hello Redux!');
 To transform my counter into a banking app:
 - [ ] increment/decrement by specific amounts
   - [X] change actions to "WITHDRAW" and "DEPOSIT"
-  - [ ] be able to specify the amounts to withdraw or deposit
+  - [X] be able to specify the amounts to withdraw or deposit
 - [ ] manage multiple accounts ("savings", "checking", "cat college")
   - [ ] dividing state into "slices"
 */

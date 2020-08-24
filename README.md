@@ -1,68 +1,65 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Monday, Aug 24: Intro to Redux
 
-## Available Scripts
 
-In the project directory, you can run:
+## Introducing Redux
+- What is Redux?
+- Why does it exist?
+- Why should I learn it?
 
-### `yarn start`
+## ...an analogy not involving drug lords
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Bank/$$$ === "state object"
+- "transaction slip" === "action object"
+    - "stack o' transaction slips" === "action creator function"
+- "bank teller" === "reducer function"    
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## First steps with Redux (without React)
 
-### `yarn test`
+- `npx create-react-app`
+    - we want nice things:
+        - new syntax
+            - object spread
+                - ellipsis 
+            - array spread
+            - .map
+            - .filter
+        - live reload
+- `npm install redux`
+    - `yarn add redux`
+- comment out everything in `src/index.js`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### The Three Rules:
 
-### `yarn build`
+- Single Source of Truth
+    - top level global state
+- State is Immutable
+    - no touching! touching is bad!
+    - you cannot modify your state variables directly! ever! noooooo!
+- State changes only happen via actions
+    - you pass an action object to a reducer function
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### The Five Steps
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### 1. Describe your "ideal" or default state
+#### 2. List out all the ways you want to change that state
+    These are your actions!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    They must be objects that have:
+        - a .type property
+            - "withdrawal" or "deposit"
+        - (optional) a .payload property
+            - "amount"
+#### 3. Write a function that expects to receive a copy of state and an action and returns a modified version of state
 
-### `yarn eject`
+    Use switch/case for a compact if/else
+    
+#### 4. Create a Redux Store, using the function from step 3
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    The store has three functions you care about;
+    - .subscribe - you pass it a function, it calls it any time the state changes
+    - .getState - returns a copy of the state
+    - .dispatch - you pass it an action, it tells the store to run the reducer function.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 5. Subscribe for changes to state
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    Mainly so we can see the state in the console

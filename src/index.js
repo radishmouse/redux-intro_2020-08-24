@@ -1,34 +1,48 @@
 import { createStore } from 'redux';
 console.log('Hello Redux!');
+/*
+To transform my counter into a banking app:
+- [ ] increment/decrement by specific amounts
+  - [X] change actions to "WITHDRAW" and "DEPOSIT"
+  - [ ] be able to specify the amounts to withdraw or deposit
+- [ ] manage multiple accounts ("savings", "checking", "cat college")
+  - [ ] dividing state into "slices"
+*/
 
 // 1. Default state
 const defaultState = 0;
 
 // 2. How do I want to be able to change state?
-const INCREMENT = 'increment';
-const DECREMENT = 'decrement';
+const DEPOSIT = 'deposit';
+const WITHDRAW = 'withdraw';
 
-const actionIncrement = {
-  type: INCREMENT
-};
+function actionDeposit(amount) {
+  return {
+    type: DEPOSIT,
+    payload: amount
+  };
+}
 
-const actionDecrement = {
-  type: DECREMENT
-};
+function actionWithdraw(amount) {
+  return {
+    type: WITHDRAW,
+    payload: amount
+  };
+}
 
 // 3. Write a function that expects the state and an action.
 //    It must return a copy of state
 // const counter = (state, action) => {};
 function counter(state, action) {
     switch(action.type) {
-      case INCREMENT:
-        // do the increment
+      case DEPOSIT:
+        // do the deposit
         // and return
-        return state + 1;
-      case DECREMENT:
-        // do the decrement
+        return state + action.payload;
+      case WITHDRAW:
+        // do the withdraw
         // and return
-        return state - 1;
+        return state - action.payload;
       default:
         return state;
     }
@@ -44,5 +58,5 @@ store.subscribe(() => {
 });
 
 window.store = store;
-window.actionIncrement = actionIncrement;
-window.actionDecrement = actionDecrement;
+window.actionDeposit = actionDeposit;
+window.actionWithdraw = actionWithdraw;

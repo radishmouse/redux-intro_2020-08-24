@@ -22,10 +22,15 @@ export function counter(state, action) {
         // }
         // return newState;
         if (state[action.payload.account] !== undefined) {
-            return {
+            const newState = {
                 ...state,
                 [action.payload.account]: state[action.payload.account] + action.payload.amount
+            };
+            const alertExists = newState.alerts.find(alert => alert.includes(action.payload.account));
+            if (alertExists && newState[action.payload.account] > 0) {
+                newState.alerts = newState.alerts.filter(alert => !alert.includes(action.payload.account))
             }
+            return newState;
         } else {
             return state;
         }
@@ -34,10 +39,18 @@ export function counter(state, action) {
         // do the withdraw
         // and return
         if (state[action.payload.account] !== undefined) {
-            return {
+            const newState = {
                 ...state,
                 [action.payload.account]: state[action.payload.account] - action.payload.amount
+            };
+            if (newState[action.payload.account] < 0) {
+                // See if the alerts slice alredy contains a warning about this account
+                const alertExists = newState.alerts.find(alert => alert.includes(action.payload.account));
+                if (!alertExists) {
+                    newState.alerts.push(`${action.payload.account} is below 0`);
+                }
             }
+            return newState;
         } else {
             return state;
         }

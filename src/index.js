@@ -1,5 +1,10 @@
 import { store } from './store';
-import { actionDeposit, actionWithdraw } from './actions';
+import { 
+  actionDeposit, 
+  actionWithdraw,
+  actionAddAccount,
+  actionDelAccount
+} from './actions';
 console.log('Hello Redux!');
 /*
 To transform my counter into a banking app:
@@ -18,3 +23,5 @@ store.subscribe(() => {
 window.store = store;
 window.actionDeposit = actionDeposit;
 window.actionWithdraw = actionWithdraw;
+window.actionAddAccount = actionAddAccount;
+window.actionDelAccount = actionDelAccount;
